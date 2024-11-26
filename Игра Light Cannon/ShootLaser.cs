@@ -29,7 +29,7 @@ public class ShootLaser : MonoBehaviour
 
     public LayerMask layerMaskWithoutPlayer = 1;
 
-    [Tooltip("Если эта переменная = true, то луч всегда включён")] public bool isTestMode = false;
+    [Tooltip("Р•СЃР»Рё СЌС‚Р° РїРµСЂРµРјРµРЅРЅР°СЏ = true, С‚Рѕ Р»СѓС‡ РІСЃРµРіРґР° РІРєР»СЋС‡С‘РЅ")] public bool isTestMode = false;
 
     void Start()
     {
@@ -63,7 +63,7 @@ public class ShootLaser : MonoBehaviour
             if (Input.GetMouseButtonUp(0))
             {
                 isShooting = false;
-                //print("Кнопка мыши отпущена");
+                //print("РљРЅРѕРїРєР° РјС‹С€Рё РѕС‚РїСѓС‰РµРЅР°");
                 clearLightBeams();
             }
         }
@@ -84,7 +84,7 @@ public class ShootLaser : MonoBehaviour
 
             laserIndces.Clear();
             LaserBeam(gameObject.transform.position, gameObject.transform.right, material);
-            //LocalLaserIndces = laserIndces; // Для отладки в инспекторе
+            //LocalLaserIndces = laserIndces; // Р”Р»СЏ РѕС‚Р»Р°РґРєРё РІ РёРЅСЃРїРµРєС‚РѕСЂРµ
 
             if (isRayDontWr == false) laserIndces.RemoveAt(laserIndces.Count - 1);
 
@@ -162,7 +162,7 @@ public class ShootLaser : MonoBehaviour
         CastRay(pos, dir);
     }
 
-    bool isRayDontWr = true; // = true, когда стандартный луч перекрывается препятствием
+    bool isRayDontWr = true; // = true, РєРѕРіРґР° СЃС‚Р°РЅРґР°СЂС‚РЅС‹Р№ Р»СѓС‡ РїРµСЂРµРєСЂС‹РІР°РµС‚СЃСЏ РїСЂРµРїСЏС‚СЃС‚РІРёРµРј
 
     void CastRay(Vector3 pos, Vector3 dir)
     {
@@ -171,21 +171,21 @@ public class ShootLaser : MonoBehaviour
         Ray ray = new Ray(pos, dir);
         RaycastHit hit = new RaycastHit();
 
-        // Если это конченая точка первого луча, то вместо стандартного райкаста мы заменяем её на райкаст в центр экрана
+        // Р•СЃР»Рё СЌС‚Рѕ РєРѕРЅС‡РµРЅР°СЏ С‚РѕС‡РєР° РїРµСЂРІРѕРіРѕ Р»СѓС‡Р°, С‚Рѕ РІРјРµСЃС‚Рѕ СЃС‚Р°РЅРґР°СЂС‚РЅРѕРіРѕ СЂР°Р№РєР°СЃС‚Р° РјС‹ Р·Р°РјРµРЅСЏРµРј РµС‘ РЅР° СЂР°Р№РєР°СЃС‚ РІ С†РµРЅС‚СЂ СЌРєСЂР°РЅР°
         if (laserIndces.Count == 1)
         {
             if (isRayDontWr == true)
             {
-                rayOrigin = MainOnceCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0)); // Нахожу точку центра экрана
+                rayOrigin = MainOnceCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0)); // РќР°С…РѕР¶Сѓ С‚РѕС‡РєСѓ С†РµРЅС‚СЂР° СЌРєСЂР°РЅР°
 
                 if (Physics.Raycast(rayOrigin, MainOnceCam.transform.forward, out OnCamHit, 250f, layerMaskWithoutPlayer))
                 {
                     if (Physics.Raycast(ray, out hit, 50, layerMaskWithoutPlayer))
                     {
-                        if (OnCamHit.distance - hit.distance > 5f) // Если стандартный луч сильно меньше чем луч из середины экрана, то используем стандартный луч
+                        if (OnCamHit.distance - hit.distance > 5f) // Р•СЃР»Рё СЃС‚Р°РЅРґР°СЂС‚РЅС‹Р№ Р»СѓС‡ СЃРёР»СЊРЅРѕ РјРµРЅСЊС€Рµ С‡РµРј Р»СѓС‡ РёР· СЃРµСЂРµРґРёРЅС‹ СЌРєСЂР°РЅР°, С‚Рѕ РёСЃРїРѕР»СЊР·СѓРµРј СЃС‚Р°РЅРґР°СЂС‚РЅС‹Р№ Р»СѓС‡
                         {
-                            print("Обнаружена проблема несоответствия луча с прицелом");
-                            // Не до конца работает так как надо, но в общем, проблемы не видно
+                            print("РћР±РЅР°СЂСѓР¶РµРЅР° РїСЂРѕР±Р»РµРјР° РЅРµСЃРѕРѕС‚РІРµС‚СЃС‚РІРёСЏ Р»СѓС‡Р° СЃ РїСЂРёС†РµР»РѕРј");
+                            // РќРµ РґРѕ РєРѕРЅС†Р° СЂР°Р±РѕС‚Р°РµС‚ С‚Р°Рє РєР°Рє РЅР°РґРѕ, РЅРѕ РІ РѕР±С‰РµРј, РїСЂРѕР±Р»РµРјС‹ РЅРµ РІРёРґРЅРѕ
                             isRayDontWr = false;
                             StandartRaycast(ray, hit);
                         }
@@ -203,7 +203,7 @@ public class ShootLaser : MonoBehaviour
                 StandartRaycast(ray, hit);
             }
         }
-        else // Во всех остальных случаях пользуемся стандартным райкастом
+        else // Р’Рѕ РІСЃРµС… РѕСЃС‚Р°Р»СЊРЅС‹С… СЃР»СѓС‡Р°СЏС… РїРѕР»СЊР·СѓРµРјСЃСЏ СЃС‚Р°РЅРґР°СЂС‚РЅС‹Рј СЂР°Р№РєР°СЃС‚РѕРј
         {
             StandartRaycast(ray, hit);
         }
@@ -227,8 +227,8 @@ public class ShootLaser : MonoBehaviour
 
     void CheckHit(RaycastHit hitInfo, Vector3 direction)
     {
-        //print("Луч №" + currentRecurceRay + " касается объекта " + hitInfo.collider.gameObject.name + " с тегом '" + hitInfo.collider.gameObject.tag + "'" + 
-        //    " длинна луча: " + hitInfo.distance + " нормаль поверхности луча: " + hitInfo.normal);
+        //print("Р›СѓС‡ в„–" + currentRecurceRay + " РєР°СЃР°РµС‚СЃСЏ РѕР±СЉРµРєС‚Р° " + hitInfo.collider.gameObject.name + " СЃ С‚РµРіРѕРј '" + hitInfo.collider.gameObject.tag + "'" + 
+        //    " РґР»РёРЅРЅР° Р»СѓС‡Р°: " + hitInfo.distance + " РЅРѕСЂРјР°Р»СЊ РїРѕРІРµСЂС…РЅРѕСЃС‚Рё Р»СѓС‡Р°: " + hitInfo.normal);
 
         if (hitInfo.collider.gameObject.tag == "Mirror")
         {       
@@ -240,7 +240,7 @@ public class ShootLaser : MonoBehaviour
 
             dir = Vector3.Reflect(direction, hitNormal);   
 
-            //print("+ Луч №" + currentRecurceRay + " коснулся зеркала. Начальное направление: " + direction + ", зеркальное напрваление: " + dir);
+            //print("+ Р›СѓС‡ в„–" + currentRecurceRay + " РєРѕСЃРЅСѓР»СЃСЏ Р·РµСЂРєР°Р»Р°. РќР°С‡Р°Р»СЊРЅРѕРµ РЅР°РїСЂР°РІР»РµРЅРёРµ: " + direction + ", Р·РµСЂРєР°Р»СЊРЅРѕРµ РЅР°РїСЂРІР°Р»РµРЅРёРµ: " + dir);
 
             if (currentRecurceRay < countOfRay)
             {
