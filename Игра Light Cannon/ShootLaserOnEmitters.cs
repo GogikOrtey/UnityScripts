@@ -5,11 +5,11 @@ using UnityEngine;
 public class ShootLaserOnEmitters : MonoBehaviour
 {
     /*
-        Немного упрощённая версия скрипта райкаста и рендера лучей.
-        Написана для эмиттеров (излучателей)
+        РќРµРјРЅРѕРіРѕ СѓРїСЂРѕС‰С‘РЅРЅР°СЏ РІРµСЂСЃРёСЏ СЃРєСЂРёРїС‚Р° СЂР°Р№РєР°СЃС‚Р° Рё СЂРµРЅРґРµСЂР° Р»СѓС‡РµР№.
+        РќР°РїРёСЃР°РЅР° РґР»СЏ СЌРјРёС‚С‚РµСЂРѕРІ (РёР·Р»СѓС‡Р°С‚РµР»РµР№)
     */
 
-    [Tooltip("Включён ли излучатель в данный момент?")] public bool isActive = false;
+    [Tooltip("Р’РєР»СЋС‡С‘РЅ Р»Рё РёР·Р»СѓС‡Р°С‚РµР»СЊ РІ РґР°РЅРЅС‹Р№ РјРѕРјРµРЅС‚?")] public bool isActive = false;
     private bool buferActive;
 
     public Material material;
@@ -17,22 +17,22 @@ public class ShootLaserOnEmitters : MonoBehaviour
     public GameObject prefabCylynder;
     public GameObject clonnedCylynder;
 
-    [Tooltip("Количество вершин (отражений лучей), в данный момент. Переменная нужна для отладки")] public int countVert;
+    [Tooltip("РљРѕР»РёС‡РµСЃС‚РІРѕ РІРµСЂС€РёРЅ (РѕС‚СЂР°Р¶РµРЅРёР№ Р»СѓС‡РµР№), РІ РґР°РЅРЅС‹Р№ РјРѕРјРµРЅС‚. РџРµСЂРµРјРµРЅРЅР°СЏ РЅСѓР¶РЅР° РґР»СЏ РѕС‚Р»Р°РґРєРё")] public int countVert;
 
-    [Tooltip("Маленький цветной кружок в верхней правой части объекта")] public GameObject Indicator;
+    [Tooltip("РњР°Р»РµРЅСЊРєРёР№ С†РІРµС‚РЅРѕР№ РєСЂСѓР¶РѕРє РІ РІРµСЂС…РЅРµР№ РїСЂР°РІРѕР№ С‡Р°СЃС‚Рё РѕР±СЉРµРєС‚Р°")] public GameObject Indicator;
 
     private Item Item;
-    [Tooltip("Максимально возможное количество лучей (при отражениях)")] public static int countOfRay;
+    [Tooltip("РњР°РєСЃРёРјР°Р»СЊРЅРѕ РІРѕР·РјРѕР¶РЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ Р»СѓС‡РµР№ (РїСЂРё РѕС‚СЂР°Р¶РµРЅРёСЏС…)")] public static int countOfRay;
 
-    [Tooltip("Массив цилиндров (лучей). Они создаются один раз, а потом только включаются и отключаются")] public GameObject[] LightRenderRay;
+    [Tooltip("РњР°СЃСЃРёРІ С†РёР»РёРЅРґСЂРѕРІ (Р»СѓС‡РµР№). РћРЅРё СЃРѕР·РґР°СЋС‚СЃСЏ РѕРґРёРЅ СЂР°Р·, Р° РїРѕС‚РѕРј С‚РѕР»СЊРєРѕ РІРєР»СЋС‡Р°СЋС‚СЃСЏ Рё РѕС‚РєР»СЋС‡Р°СЋС‚СЃСЏ")] public GameObject[] LightRenderRay;
 
     private RaycastHit OnCamHit;
     private Vector3 rayOrigin;
 
     Vector3 pos, dir;
-    [Tooltip("Массив всех точек, на пути луча")] public List<Vector3> laserIndces = new List<Vector3>();
+    [Tooltip("РњР°СЃСЃРёРІ РІСЃРµС… С‚РѕС‡РµРє, РЅР° РїСѓС‚Рё Р»СѓС‡Р°")] public List<Vector3> laserIndces = new List<Vector3>();
     
-    public Color orange; // Цвет задаём в редакторе HSW(28, 100, 100)
+    public Color orange; // Р¦РІРµС‚ Р·Р°РґР°С‘Рј РІ СЂРµРґР°РєС‚РѕСЂРµ HSW(28, 100, 100)
 
     void Start()
     {
@@ -60,7 +60,7 @@ public class ShootLaserOnEmitters : MonoBehaviour
             if (cc == 0)
             {
                 isActive = !isActive;
-                print("Активировали излучатели");
+                print("РђРєС‚РёРІРёСЂРѕРІР°Р»Рё РёР·Р»СѓС‡Р°С‚РµР»Рё");
                 cc = 10;
             }
         }
@@ -73,7 +73,7 @@ public class ShootLaserOnEmitters : MonoBehaviour
 
             if (isActive == false)
             {
-                clearLightBeams(); // Чистим все лучи, если излучатель выключили
+                clearLightBeams(); // Р§РёСЃС‚РёРј РІСЃРµ Р»СѓС‡Рё, РµСЃР»Рё РёР·Р»СѓС‡Р°С‚РµР»СЊ РІС‹РєР»СЋС‡РёР»Рё
                 Indicator.GetComponent<MeshRenderer>().material.color = orange;
             }
             else
@@ -97,8 +97,8 @@ public class ShootLaserOnEmitters : MonoBehaviour
         }
     }
 
-    [Tooltip("Видит ли меня хоть одна камера? Если да, то лучи рендерятся со скоростью частоты кадров. " +
-        "Если нет - со скоростью фиксированного обновления. Эта переменная обновляется, только если излучатель включён")] public bool isLookedMe; 
+    [Tooltip("Р’РёРґРёС‚ Р»Рё РјРµРЅСЏ С…РѕС‚СЊ РѕРґРЅР° РєР°РјРµСЂР°? Р•СЃР»Рё РґР°, С‚Рѕ Р»СѓС‡Рё СЂРµРЅРґРµСЂСЏС‚СЃСЏ СЃРѕ СЃРєРѕСЂРѕСЃС‚СЊСЋ С‡Р°СЃС‚РѕС‚С‹ РєР°РґСЂРѕРІ. " +
+        "Р•СЃР»Рё РЅРµС‚ - СЃРѕ СЃРєРѕСЂРѕСЃС‚СЊСЋ С„РёРєСЃРёСЂРѕРІР°РЅРЅРѕРіРѕ РѕР±РЅРѕРІР»РµРЅРёСЏ. Р­С‚Р° РїРµСЂРµРјРµРЅРЅР°СЏ РѕР±РЅРѕРІР»СЏРµС‚СЃСЏ, С‚РѕР»СЊРєРѕ РµСЃР»Рё РёР·Р»СѓС‡Р°С‚РµР»СЊ РІРєР»СЋС‡С‘РЅ")] public bool isLookedMe; 
     private int lookMeOffset;
 
     void OnWillRenderObject()
@@ -187,7 +187,7 @@ public class ShootLaserOnEmitters : MonoBehaviour
         CastRay(pos, dir);
     }
 
-    bool isRayDontWr = true; // = true, когда стандартный луч перекрывается препятствием
+    bool isRayDontWr = true; // = true, РєРѕРіРґР° СЃС‚Р°РЅРґР°СЂС‚РЅС‹Р№ Р»СѓС‡ РїРµСЂРµРєСЂС‹РІР°РµС‚СЃСЏ РїСЂРµРїСЏС‚СЃС‚РІРёРµРј
 
     void CastRay(Vector3 pos, Vector3 dir)
     {
@@ -215,8 +215,8 @@ public class ShootLaserOnEmitters : MonoBehaviour
 
     void CheckHit(RaycastHit hitInfo, Vector3 direction)
     {
-        //print("Луч №" + currentRecurceRay + " касается объекта " + hitInfo.collider.gameObject.name + " с тегом '" + hitInfo.collider.gameObject.tag + "'" + 
-        //    " длинна луча: " + hitInfo.distance + " нормаль поверхности луча: " + hitInfo.normal);
+        //print("Р›СѓС‡ в„–" + currentRecurceRay + " РєР°СЃР°РµС‚СЃСЏ РѕР±СЉРµРєС‚Р° " + hitInfo.collider.gameObject.name + " СЃ С‚РµРіРѕРј '" + hitInfo.collider.gameObject.tag + "'" + 
+        //    " РґР»РёРЅРЅР° Р»СѓС‡Р°: " + hitInfo.distance + " РЅРѕСЂРјР°Р»СЊ РїРѕРІРµСЂС…РЅРѕСЃС‚Рё Р»СѓС‡Р°: " + hitInfo.normal);
 
         if (hitInfo.collider.gameObject.tag == "Mirror")
         {
@@ -228,7 +228,7 @@ public class ShootLaserOnEmitters : MonoBehaviour
 
             dir = Vector3.Reflect(direction, hitNormal);
 
-            //print("+ Луч №" + currentRecurceRay + " коснулся зеркала. Начальное направление: " + direction + ", зеркальное напрваление: " + dir);
+            //print("+ Р›СѓС‡ в„–" + currentRecurceRay + " РєРѕСЃРЅСѓР»СЃСЏ Р·РµСЂРєР°Р»Р°. РќР°С‡Р°Р»СЊРЅРѕРµ РЅР°РїСЂР°РІР»РµРЅРёРµ: " + direction + ", Р·РµСЂРєР°Р»СЊРЅРѕРµ РЅР°РїСЂРІР°Р»РµРЅРёРµ: " + dir);
 
             if (currentRecurceRay < countOfRay)
             {
