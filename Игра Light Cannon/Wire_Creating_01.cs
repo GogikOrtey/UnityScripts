@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class Wire_Creating_01 : MonoBehaviour
 {
-    //Если точка находится в локальных координатах 0,0,0 - то она игнорируется
+    //Р•СЃР»Рё С‚РѕС‡РєР° РЅР°С…РѕРґРёС‚СЃСЏ РІ Р»РѕРєР°Р»СЊРЅС‹С… РєРѕРѕСЂРґРёРЅР°С‚Р°С… 0,0,0 - С‚Рѕ РѕРЅР° РёРіРЅРѕСЂРёСЂСѓРµС‚СЃСЏ
 
     public GameObject[] Points = new GameObject[20];
     //public Vector3[] Points2 = new Vector3[3];
 
-    [Tooltip("Фиксировать ли эту точку? [Первая и последняя точка - всегда isKinematic]")] public bool[] Points_Is_Kinematic = new bool[20];
+    [Tooltip("Р¤РёРєСЃРёСЂРѕРІР°С‚СЊ Р»Рё СЌС‚Сѓ С‚РѕС‡РєСѓ? [РџРµСЂРІР°СЏ Рё РїРѕСЃР»РµРґРЅСЏСЏ С‚РѕС‡РєР° - РІСЃРµРіРґР° isKinematic]")] public bool[] Points_Is_Kinematic = new bool[20];
 
-    public float distance = 0.77f; // желаемое расстояние // Настраиватся в инспекторе. Идеальное расстояние, полученное опытным путём - это 0.0077
+    public float distance = 0.77f; // Р¶РµР»Р°РµРјРѕРµ СЂР°СЃСЃС‚РѕСЏРЅРёРµ // РќР°СЃС‚СЂР°РёРІР°С‚СЃСЏ РІ РёРЅСЃРїРµРєС‚РѕСЂРµ. РРґРµР°Р»СЊРЅРѕРµ СЂР°СЃСЃС‚РѕСЏРЅРёРµ, РїРѕР»СѓС‡РµРЅРЅРѕРµ РѕРїС‹С‚РЅС‹Рј РїСѓС‚С‘Рј - СЌС‚Рѕ 0.0077
     private float sizeGizmos = 0.1f;
 
     public GameObject Prefab_Capsule;
     private GameObject New_Capsule;
 
-    public GameObject Prefab_Sphere; // Используется для ключевых звеньев
+    public GameObject Prefab_Sphere; // РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РґР»СЏ РєР»СЋС‡РµРІС‹С… Р·РІРµРЅСЊРµРІ
 
     //public bool notOk = false;
     private Vector3 zero_vec = Vector3.zero;
@@ -26,10 +26,10 @@ public class Wire_Creating_01 : MonoBehaviour
     Vector3 B = Vector3.zero;
     Vector3 D = Vector3.zero;
 
-    public GameObject prefGO_Segment = null; // Пердыдущее звено. Нужно для создание связей в цепочке
+    public GameObject prefGO_Segment = null; // РџРµСЂРґС‹РґСѓС‰РµРµ Р·РІРµРЅРѕ. РќСѓР¶РЅРѕ РґР»СЏ СЃРѕР·РґР°РЅРёРµ СЃРІСЏР·РµР№ РІ С†РµРїРѕС‡РєРµ
 
-    [Tooltip("Отрисовывать ли точки, находящиеся в нулевых координатах?")] public bool isEnebleDrowZeroPoints = true;
-    [Tooltip("Ограничитель использования точек. Если равен нулю, то используются все точки")] public int Limitter = 0;
+    [Tooltip("РћС‚СЂРёСЃРѕРІС‹РІР°С‚СЊ Р»Рё С‚РѕС‡РєРё, РЅР°С…РѕРґСЏС‰РёРµСЃСЏ РІ РЅСѓР»РµРІС‹С… РєРѕРѕСЂРґРёРЅР°С‚Р°С…?")] public bool isEnebleDrowZeroPoints = true;
+    [Tooltip("РћРіСЂР°РЅРёС‡РёС‚РµР»СЊ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ С‚РѕС‡РµРє. Р•СЃР»Рё СЂР°РІРµРЅ РЅСѓР»СЋ, С‚Рѕ РёСЃРїРѕР»СЊР·СѓСЋС‚СЃСЏ РІСЃРµ С‚РѕС‡РєРё")] public int Limitter = 0;
 
     public Material OffWire;
     public Material OnWire;
@@ -44,7 +44,7 @@ public class Wire_Creating_01 : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        // Отрисовываю положение точек
+        // РћС‚СЂРёСЃРѕРІС‹РІР°СЋ РїРѕР»РѕР¶РµРЅРёРµ С‚РѕС‡РµРє
 
         if (isEnebleDraw == true)
         {
@@ -54,14 +54,14 @@ public class Wire_Creating_01 : MonoBehaviour
             for (int i = 0; i < Points.Length; i++)
             {
                 if ((Points[i] != null) && (Points[i].transform.localPosition != zero_vec))
-                // Если точка существует, и не находится в локальных координатах 0,0,0
+                // Р•СЃР»Рё С‚РѕС‡РєР° СЃСѓС‰РµСЃС‚РІСѓРµС‚, Рё РЅРµ РЅР°С…РѕРґРёС‚СЃСЏ РІ Р»РѕРєР°Р»СЊРЅС‹С… РєРѕРѕСЂРґРёРЅР°С‚Р°С… 0,0,0
                 {
                     Gizmos.color = Color.blue;
                     Gizmos.DrawSphere(Points[i].transform.position, sizeGizmos);
                 }
                 else if ((Points[i].transform.localPosition == zero_vec) && (isEnebleDrowZeroPoints == true))
                 {
-                    // На всякий случай, отрисовываю точки находящиеся в нулевых координатах, если они есть
+                    // РќР° РІСЃСЏРєРёР№ СЃР»СѓС‡Р°Р№, РѕС‚СЂРёСЃРѕРІС‹РІР°СЋ С‚РѕС‡РєРё РЅР°С…РѕРґСЏС‰РёРµСЃСЏ РІ РЅСѓР»РµРІС‹С… РєРѕРѕСЂРґРёРЅР°С‚Р°С…, РµСЃР»Рё РѕРЅРё РµСЃС‚СЊ
 
                     Gizmos.color = Color.yellow;
                     Gizmos.DrawSphere(Points[i].transform.position, sizeGizmos);
@@ -86,9 +86,9 @@ public class Wire_Creating_01 : MonoBehaviour
         for (int i = 0; i < Points.Length; i++)
         {
             if ((Points[i] != null) && (Points[i].transform.localPosition != zero_vec) && (i < Limitter))
-            // Если точка существует, и не находится в локальных координатах 0,0,0
+            // Р•СЃР»Рё С‚РѕС‡РєР° СЃСѓС‰РµСЃС‚РІСѓРµС‚, Рё РЅРµ РЅР°С…РѕРґРёС‚СЃСЏ РІ Р»РѕРєР°Р»СЊРЅС‹С… РєРѕРѕСЂРґРёРЅР°С‚Р°С… 0,0,0
             {
-                //print("Локальные координаты точки " + i + " = " + Points[i].transform.localPosition);
+                //print("Р›РѕРєР°Р»СЊРЅС‹Рµ РєРѕРѕСЂРґРёРЅР°С‚С‹ С‚РѕС‡РєРё " + i + " = " + Points[i].transform.localPosition);
 
                 //Gizmos.DrawSphere(Points[i].transform.position, sizeGizmos);
 
@@ -105,56 +105,56 @@ public class Wire_Creating_01 : MonoBehaviour
 
                         if ((distance * whileStoper) < Vector3.Distance(A, B))
                         {
-                            D = Vector3.MoveTowards(A, B, distance * whileStoper);       // Иду с шагом distance от точки А до точки В, и создаю звенья из префабов, связывая их друг с другом
-                            // Вот тут я не сохраняю координаты вычисленных точек, просто их отрисовываю
+                            D = Vector3.MoveTowards(A, B, distance * whileStoper);       // РРґСѓ СЃ С€Р°РіРѕРј distance РѕС‚ С‚РѕС‡РєРё Рђ РґРѕ С‚РѕС‡РєРё Р’, Рё СЃРѕР·РґР°СЋ Р·РІРµРЅСЊСЏ РёР· РїСЂРµС„Р°Р±РѕРІ, СЃРІСЏР·С‹РІР°СЏ РёС… РґСЂСѓРі СЃ РґСЂСѓРіРѕРј
+                            // Р’РѕС‚ С‚СѓС‚ СЏ РЅРµ СЃРѕС…СЂР°РЅСЏСЋ РєРѕРѕСЂРґРёРЅР°С‚С‹ РІС‹С‡РёСЃР»РµРЅРЅС‹С… С‚РѕС‡РµРє, РїСЂРѕСЃС‚Рѕ РёС… РѕС‚СЂРёСЃРѕРІС‹РІР°СЋ
 
                             if (   (Mathf.Abs(D.x - Points[i - 1].transform.position.x) < 0.001f)
                                 && (Mathf.Abs(D.y - Points[i - 1].transform.position.y) < 0.001f)
                                 && (Mathf.Abs(D.z - Points[i - 1].transform.position.z) < 0.001f)
                                 && (isLoop == false))
-                                // Немного не оптимизировано, но зато работает)
-                                // Здесь генератор звеньев проверяет, и если это звено - ключевое, то он генерирует его немного по другому
+                                // РќРµРјРЅРѕРіРѕ РЅРµ РѕРїС‚РёРјРёР·РёСЂРѕРІР°РЅРѕ, РЅРѕ Р·Р°С‚Рѕ СЂР°Р±РѕС‚Р°РµС‚)
+                                // Р—РґРµСЃСЊ РіРµРЅРµСЂР°С‚РѕСЂ Р·РІРµРЅСЊРµРІ РїСЂРѕРІРµСЂСЏРµС‚, Рё РµСЃР»Рё СЌС‚Рѕ Р·РІРµРЅРѕ - РєР»СЋС‡РµРІРѕРµ, С‚Рѕ РѕРЅ РіРµРЅРµСЂРёСЂСѓРµС‚ РµРіРѕ РЅРµРјРЅРѕРіРѕ РїРѕ РґСЂСѓРіРѕРјСѓ
                             {
                                 New_Capsule = Instantiate(Prefab_Sphere, D, Quaternion.identity);
                                 CreatedObjects.Add(New_Capsule);
 
-                                // Задаю поворот для звена - средним, между предыдущим и следующим звеном
+                                // Р—Р°РґР°СЋ РїРѕРІРѕСЂРѕС‚ РґР»СЏ Р·РІРµРЅР° - СЃСЂРµРґРЅРёРј, РјРµР¶РґСѓ РїСЂРµРґС‹РґСѓС‰РёРј Рё СЃР»РµРґСѓСЋС‰РёРј Р·РІРµРЅРѕРј
                                 #region aaa
                                 /*
-                                Quaternion prevAngle = prefGO_Segment.transform.localRotation; // угол предыдущей точки
-                                Quaternion nextAngle = Points[i].transform.localRotation; // угол следующей точки
-                                float t = 0.5f; // параметр интерполяции
-                                Quaternion currentAngle = Quaternion.Lerp(prevAngle, nextAngle, t); // средний угол текущей точки
-                                New_Capsule.transform.localRotation = currentAngle; // задаем угол поворота для текущей точки
+                                Quaternion prevAngle = prefGO_Segment.transform.localRotation; // СѓРіРѕР» РїСЂРµРґС‹РґСѓС‰РµР№ С‚РѕС‡РєРё
+                                Quaternion nextAngle = Points[i].transform.localRotation; // СѓРіРѕР» СЃР»РµРґСѓСЋС‰РµР№ С‚РѕС‡РєРё
+                                float t = 0.5f; // РїР°СЂР°РјРµС‚СЂ РёРЅС‚РµСЂРїРѕР»СЏС†РёРё
+                                Quaternion currentAngle = Quaternion.Lerp(prevAngle, nextAngle, t); // СЃСЂРµРґРЅРёР№ СѓРіРѕР» С‚РµРєСѓС‰РµР№ С‚РѕС‡РєРё
+                                New_Capsule.transform.localRotation = currentAngle; // Р·Р°РґР°РµРј СѓРіРѕР» РїРѕРІРѕСЂРѕС‚Р° РґР»СЏ С‚РµРєСѓС‰РµР№ С‚РѕС‡РєРё
                                 */
 
                                 /*
-                                float x1 = prefGO_Segment.transform.localEulerAngles.x; // начальное значение по оси X
-                                float x2 = Points[i].transform.localEulerAngles.x; // конечное значение по оси X
-                                float y1 = prefGO_Segment.transform.localEulerAngles.y; // начальное значение по оси Y
-                                float y2 = Points[i].transform.localEulerAngles.y; // конечное значение по оси Y
-                                float z1 = prefGO_Segment.transform.localEulerAngles.z; // начальное значение по оси Z
-                                float z2 = Points[i].transform.localEulerAngles.z; // конечное значение по оси Z
-                                float t = 0.5f; // параметр интерполяции
-                                float x3 = Mathf.Lerp(x1, x2, t); // среднее значение по оси X
-                                float y3 = Mathf.Lerp(y1, y2, t); // среднее значение по оси Y
-                                float z3 = Mathf.Lerp(z1, z2, t); // среднее значение по оси Z
-                                Vector3 currentAngle = new Vector3(x3, y3, z3); // средний угол в виде Vector3
-                                New_Capsule.transform.localEulerAngles = currentAngle; // задаем угол поворота для текущей точки                                
+                                float x1 = prefGO_Segment.transform.localEulerAngles.x; // РЅР°С‡Р°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РїРѕ РѕСЃРё X
+                                float x2 = Points[i].transform.localEulerAngles.x; // РєРѕРЅРµС‡РЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РїРѕ РѕСЃРё X
+                                float y1 = prefGO_Segment.transform.localEulerAngles.y; // РЅР°С‡Р°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РїРѕ РѕСЃРё Y
+                                float y2 = Points[i].transform.localEulerAngles.y; // РєРѕРЅРµС‡РЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РїРѕ РѕСЃРё Y
+                                float z1 = prefGO_Segment.transform.localEulerAngles.z; // РЅР°С‡Р°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РїРѕ РѕСЃРё Z
+                                float z2 = Points[i].transform.localEulerAngles.z; // РєРѕРЅРµС‡РЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РїРѕ РѕСЃРё Z
+                                float t = 0.5f; // РїР°СЂР°РјРµС‚СЂ РёРЅС‚РµСЂРїРѕР»СЏС†РёРё
+                                float x3 = Mathf.Lerp(x1, x2, t); // СЃСЂРµРґРЅРµРµ Р·РЅР°С‡РµРЅРёРµ РїРѕ РѕСЃРё X
+                                float y3 = Mathf.Lerp(y1, y2, t); // СЃСЂРµРґРЅРµРµ Р·РЅР°С‡РµРЅРёРµ РїРѕ РѕСЃРё Y
+                                float z3 = Mathf.Lerp(z1, z2, t); // СЃСЂРµРґРЅРµРµ Р·РЅР°С‡РµРЅРёРµ РїРѕ РѕСЃРё Z
+                                Vector3 currentAngle = new Vector3(x3, y3, z3); // СЃСЂРµРґРЅРёР№ СѓРіРѕР» РІ РІРёРґРµ Vector3
+                                New_Capsule.transform.localEulerAngles = currentAngle; // Р·Р°РґР°РµРј СѓРіРѕР» РїРѕРІРѕСЂРѕС‚Р° РґР»СЏ С‚РµРєСѓС‰РµР№ С‚РѕС‡РєРё                                
 
                                 print("i = " + i);
-                                print("Пердыдущий угол: " + prefGO_Segment.transform.localEulerAngles);
-                                print("Следующий угол: " + Points[i].transform.localEulerAngles);
-                                print("Средний угол: " + currentAngle);
+                                print("РџРµСЂРґС‹РґСѓС‰РёР№ СѓРіРѕР»: " + prefGO_Segment.transform.localEulerAngles);
+                                print("РЎР»РµРґСѓСЋС‰РёР№ СѓРіРѕР»: " + Points[i].transform.localEulerAngles);
+                                print("РЎСЂРµРґРЅРёР№ СѓРіРѕР»: " + currentAngle);
                                 */
                                 #endregion
                             }
-                            else // Генерирую капсулу (сегмент)
+                            else // Р“РµРЅРµСЂРёСЂСѓСЋ РєР°РїСЃСѓР»Сѓ (СЃРµРіРјРµРЅС‚)
                             {
                                 New_Capsule = Instantiate(Prefab_Capsule, D, Quaternion.identity);  
                                 CreatedObjects.Add(New_Capsule);
 
-                                // Задаю ему нужный угол поворота
+                                // Р—Р°РґР°СЋ РµРјСѓ РЅСѓР¶РЅС‹Р№ СѓРіРѕР» РїРѕРІРѕСЂРѕС‚Р°
                                 New_Capsule.transform.LookAt(Points[i].transform.position);
                                 New_Capsule.transform.eulerAngles += new Vector3(90, 0, 0);
                             }
@@ -176,7 +176,7 @@ public class Wire_Creating_01 : MonoBehaviour
                             && (Mathf.Abs(New_Capsule.transform.position.z - Points[i-1].transform.position.z) < 0.001f))
                             {
                                 if ((Points_Is_Kinematic[i-1] == true) || (i == 1))
-                                // Первая точка в маршруте - всегда isKinematic
+                                // РџРµСЂРІР°СЏ С‚РѕС‡РєР° РІ РјР°СЂС€СЂСѓС‚Рµ - РІСЃРµРіРґР° isKinematic
                                 {
                                     New_Capsule.gameObject.GetComponent<Rigidbody>().isKinematic = true;
                                     New_Capsule.gameObject.GetComponent<MeshRenderer>().material = StaticWire;
@@ -196,7 +196,7 @@ public class Wire_Creating_01 : MonoBehaviour
             {
                 if (((i == Limitter) || ((Points[i - 1].transform.localPosition == zero_vec))))// && (Points.Length < i-2) && (i-2 > 0))
                 {
-                    //print("Генерю последнюю точку " + (i-2) + " с координатами " + Points[i-2].transform.localPosition);
+                    //print("Р“РµРЅРµСЂСЋ РїРѕСЃР»РµРґРЅСЋСЋ С‚РѕС‡РєСѓ " + (i-2) + " СЃ РєРѕРѕСЂРґРёРЅР°С‚Р°РјРё " + Points[i-2].transform.localPosition);
 
                     New_Capsule = Instantiate(Prefab_Sphere, Points[i - 2].transform.position, Quaternion.identity);
                     CreatedObjects.Add(New_Capsule);
@@ -205,7 +205,7 @@ public class Wire_Creating_01 : MonoBehaviour
                     New_Capsule.gameObject.GetComponent<ConfigurableJoint>().connectedBody = prefGO_Segment.GetComponent<Rigidbody>();
 
                     //if (Points_Is_Kinematic[i-2] == true)
-                    // Последняя точка в маршруте - всегда isKinematic
+                    // РџРѕСЃР»РµРґРЅСЏСЏ С‚РѕС‡РєР° РІ РјР°СЂС€СЂСѓС‚Рµ - РІСЃРµРіРґР° isKinematic
 
                     New_Capsule.gameObject.GetComponent<Rigidbody>().isKinematic = true;
                     New_Capsule.gameObject.GetComponent<MeshRenderer>().material = StaticWire;
@@ -225,24 +225,24 @@ public class Wire_Creating_01 : MonoBehaviour
 
     private float ttt = 0.125f;
 
-    // Цикл постепенного включения сегментов провода
+    // Р¦РёРєР» РїРѕСЃС‚РµРїРµРЅРЅРѕРіРѕ РІРєР»СЋС‡РµРЅРёСЏ СЃРµРіРјРµРЅС‚РѕРІ РїСЂРѕРІРѕРґР°
     IEnumerator ProcessingElementColoringWall()
     {
         int i = 0;
         int timeStoper = 0;
 
-        // Тут делаю цикл, но через простой перебор
+        // РўСѓС‚ РґРµР»Р°СЋ С†РёРєР», РЅРѕ С‡РµСЂРµР· РїСЂРѕСЃС‚РѕР№ РїРµСЂРµР±РѕСЂ
 
         while (i < countOfList + 7)
         {
             Shader shader = OffWire.shader;
-            Material newMat = new Material(shader); // Создаём новый материал каждый раз
+            Material newMat = new Material(shader); // РЎРѕР·РґР°С‘Рј РЅРѕРІС‹Р№ РјР°С‚РµСЂРёР°Р» РєР°Р¶РґС‹Р№ СЂР°Р·
 
             newMat.color = Color.Lerp(OffWire.color, OnWire.color, ttt);
 
             if (i < countOfList)
             {
-                CreatedObjects[i].gameObject.GetComponent<MeshRenderer>().material = newMat; // "Включаю" все элементы провода                
+                CreatedObjects[i].gameObject.GetComponent<MeshRenderer>().material = newMat; // "Р’РєР»СЋС‡Р°СЋ" РІСЃРµ СЌР»РµРјРµРЅС‚С‹ РїСЂРѕРІРѕРґР°                
             }
 
             if (i - 7 < countOfList)
@@ -297,31 +297,31 @@ public class Wire_Creating_01 : MonoBehaviour
 
         if (i == countOfList + 7)
         {
-            isEnableFinish = true; // Провод передаёт сигнал, что включен - когда включен его последний сегмент
+            isEnableFinish = true; // РџСЂРѕРІРѕРґ РїРµСЂРµРґР°С‘С‚ СЃРёРіРЅР°Р», С‡С‚Рѕ РІРєР»СЋС‡РµРЅ - РєРѕРіРґР° РІРєР»СЋС‡РµРЅ РµРіРѕ РїРѕСЃР»РµРґРЅРёР№ СЃРµРіРјРµРЅС‚
             //currIndexOfEnabling = 0;
 
             yield break;
         }
     }
 
-    // Цикл постепенного выключения сегментов провода
+    // Р¦РёРєР» РїРѕСЃС‚РµРїРµРЅРЅРѕРіРѕ РІС‹РєР»СЋС‡РµРЅРёСЏ СЃРµРіРјРµРЅС‚РѕРІ РїСЂРѕРІРѕРґР°
     IEnumerator ProcessingDisebleElementColoringWall()
     {
         int i = 0;
         int timeStoper = 0;
 
-        // Тут делаю цикл, но через простой перебор
+        // РўСѓС‚ РґРµР»Р°СЋ С†РёРєР», РЅРѕ С‡РµСЂРµР· РїСЂРѕСЃС‚РѕР№ РїРµСЂРµР±РѕСЂ
 
         while (i < countOfList + 7)
         {
             Shader shader = OnWire.shader;
-            Material newMat = new Material(shader); // Создаём новый материал каждый раз
+            Material newMat = new Material(shader); // РЎРѕР·РґР°С‘Рј РЅРѕРІС‹Р№ РјР°С‚РµСЂРёР°Р» РєР°Р¶РґС‹Р№ СЂР°Р·
 
             newMat.color = Color.Lerp(OnWire.color, OffWire.color, ttt);
 
             if (i < countOfList)
             {
-                CreatedObjects[i].gameObject.GetComponent<MeshRenderer>().material = newMat; // "Включаю" все элементы провода                
+                CreatedObjects[i].gameObject.GetComponent<MeshRenderer>().material = newMat; // "Р’РєР»СЋС‡Р°СЋ" РІСЃРµ СЌР»РµРјРµРЅС‚С‹ РїСЂРѕРІРѕРґР°                
             }
 
             if (i - 7 < countOfList)
@@ -376,7 +376,7 @@ public class Wire_Creating_01 : MonoBehaviour
 
         if (i == countOfList + 7)
         {
-            isEnableFinish = false; // Провод передаёт сигнал, что выключен - когда выключен его последний сегмент
+            isEnableFinish = false; // РџСЂРѕРІРѕРґ РїРµСЂРµРґР°С‘С‚ СЃРёРіРЅР°Р», С‡С‚Рѕ РІС‹РєР»СЋС‡РµРЅ - РєРѕРіРґР° РІС‹РєР»СЋС‡РµРЅ РµРіРѕ РїРѕСЃР»РµРґРЅРёР№ СЃРµРіРјРµРЅС‚
 
             yield break;
         }
@@ -403,12 +403,12 @@ public class Wire_Creating_01 : MonoBehaviour
                     isStartFlageOfDisableWire = false;
                 }
             }
-            else // Одна из куротин сработает только один раз, при переключении
+            else // РћРґРЅР° РёР· РєСѓСЂРѕС‚РёРЅ СЃСЂР°Р±РѕС‚Р°РµС‚ С‚РѕР»СЊРєРѕ РѕРґРёРЅ СЂР°Р·, РїСЂРё РїРµСЂРµРєР»СЋС‡РµРЅРёРё
             {
                 if (workMode == 1)
                 {
                     workMode = 0;
-                    if (isStartFlageOfDisableWire == false) // Анимация вЫключения провода сработает, только если он до этого был включён
+                    if (isStartFlageOfDisableWire == false) // РђРЅРёРјР°С†РёСЏ РІР«РєР»СЋС‡РµРЅРёСЏ РїСЂРѕРІРѕРґР° СЃСЂР°Р±РѕС‚Р°РµС‚, С‚РѕР»СЊРєРѕ РµСЃР»Рё РѕРЅ РґРѕ СЌС‚РѕРіРѕ Р±С‹Р» РІРєР»СЋС‡С‘РЅ
                     {
                         StartCoroutine(ProcessingDisebleElementColoringWall());
                     }
@@ -426,7 +426,7 @@ public class Wire_Creating_01 : MonoBehaviour
         for (int i = 0; i < Points.Length; i++)
         {
             if ((Points[i] != null) && (Points[i].transform.localPosition != zero_vec))
-            // Если точка существует, и не находится в локальных координатах 0,0,0
+            // Р•СЃР»Рё С‚РѕС‡РєР° СЃСѓС‰РµСЃС‚РІСѓРµС‚, Рё РЅРµ РЅР°С…РѕРґРёС‚СЃСЏ РІ Р»РѕРєР°Р»СЊРЅС‹С… РєРѕРѕСЂРґРёРЅР°С‚Р°С… 0,0,0
             {
                 Gizmos.DrawSphere(Points[i].transform.position, sizeGizmos);
 
@@ -444,9 +444,9 @@ public class Wire_Creating_01 : MonoBehaviour
                         if ((distance * whileStoper) < Vector3.Distance(A, B))
                         {
                             D = Vector3.MoveTowards(A, B, distance * whileStoper);
-                            Gizmos.DrawSphere(D, sizeGizmos);                           // Вот тут я не сохраняю координаты вычисленных точек, просто их отрисовываю
+                            Gizmos.DrawSphere(D, sizeGizmos);                           // Р’РѕС‚ С‚СѓС‚ СЏ РЅРµ СЃРѕС…СЂР°РЅСЏСЋ РєРѕРѕСЂРґРёРЅР°С‚С‹ РІС‹С‡РёСЃР»РµРЅРЅС‹С… С‚РѕС‡РµРє, РїСЂРѕСЃС‚Рѕ РёС… РѕС‚СЂРёСЃРѕРІС‹РІР°СЋ
 
-                            // New_Capsule = Instantiate(Prefab_Capsule, D, Quaternion.identity);  // Наверно стоит делать массив таких объектов
+                            // New_Capsule = Instantiate(Prefab_Capsule, D, Quaternion.identity);  // РќР°РІРµСЂРЅРѕ СЃС‚РѕРёС‚ РґРµР»Р°С‚СЊ РјР°СЃСЃРёРІ С‚Р°РєРёС… РѕР±СЉРµРєС‚РѕРІ
 
                             //print("D = " + D);
 
@@ -470,7 +470,7 @@ public class Wire_Creating_01 : MonoBehaviour
         for (int i = 0; i < Points.Length; i++)
         {
             if ((Points[i] != null) && (Points[i].transform.localPosition != zero_vec))
-            // Если точка существует, и не находится в локальных координатах 0,0,0
+            // Р•СЃР»Рё С‚РѕС‡РєР° СЃСѓС‰РµСЃС‚РІСѓРµС‚, Рё РЅРµ РЅР°С…РѕРґРёС‚СЃСЏ РІ Р»РѕРєР°Р»СЊРЅС‹С… РєРѕРѕСЂРґРёРЅР°С‚Р°С… 0,0,0
             {
                 Gizmos.DrawSphere(Points[i].transform.position, sizeGizmos);
 
@@ -488,7 +488,7 @@ public class Wire_Creating_01 : MonoBehaviour
                         if ((distance * whileStoper) < Vector3.Distance(A, B))
                         {
                             D = Vector3.MoveTowards(A, B, distance * whileStoper);
-                            Gizmos.DrawSphere(D, sizeGizmos);                           // Вот тут я не сохраняю координаты вычисленных точек, просто их отрисовываю
+                            Gizmos.DrawSphere(D, sizeGizmos);                           // Р’РѕС‚ С‚СѓС‚ СЏ РЅРµ СЃРѕС…СЂР°РЅСЏСЋ РєРѕРѕСЂРґРёРЅР°С‚С‹ РІС‹С‡РёСЃР»РµРЅРЅС‹С… С‚РѕС‡РµРє, РїСЂРѕСЃС‚Рѕ РёС… РѕС‚СЂРёСЃРѕРІС‹РІР°СЋ
 
                             //print("D = " + D);
 
