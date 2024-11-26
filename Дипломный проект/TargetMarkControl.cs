@@ -6,23 +6,23 @@ using TMPro;
 
 public class TargetMarkControl : MonoBehaviour
 {
-    // Метка направления - основа
+    // РњРµС‚РєР° РЅР°РїСЂР°РІР»РµРЅРёСЏ - РѕСЃРЅРѕРІР°
     public GameObject MainMarkRot;
 
     //public GameObject Player;
 
-    // Направление угла, которое задаётся
+    // РќР°РїСЂР°РІР»РµРЅРёРµ СѓРіР»Р°, РєРѕС‚РѕСЂРѕРµ Р·Р°РґР°С‘С‚СЃСЏ
     [Range(0f, 180f)] public float directionOfRotation = 90f;
-    // 90 = прямо сверху
+    // 90 = РїСЂСЏРјРѕ СЃРІРµСЂС…Сѓ
 
-    // Вот сюда нужно добавить код для управления этой шкалой
-    // Т.е. например 0 = 90, 1 = 0 градусов, а 0 = 180 градусов
+    // Р’РѕС‚ СЃСЋРґР° РЅСѓР¶РЅРѕ РґРѕР±Р°РІРёС‚СЊ РєРѕРґ РґР»СЏ СѓРїСЂР°РІР»РµРЅРёСЏ СЌС‚РѕР№ С€РєР°Р»РѕР№
+    // Рў.Рµ. РЅР°РїСЂРёРјРµСЂ 0 = 90, 1 = 0 РіСЂР°РґСѓСЃРѕРІ, Р° 0 = 180 РіСЂР°РґСѓСЃРѕРІ
 
-    // Текущий угол поворота
+    // РўРµРєСѓС‰РёР№ СѓРіРѕР» РїРѕРІРѕСЂРѕС‚Р°
     private float currentRotation = 0f;
-    // 0 = прямо наверху карты
+    // 0 = РїСЂСЏРјРѕ РЅР°РІРµСЂС…Сѓ РєР°СЂС‚С‹
 
-    // Скорость поворота метки до нужного значения
+    // РЎРєРѕСЂРѕСЃС‚СЊ РїРѕРІРѕСЂРѕС‚Р° РјРµС‚РєРё РґРѕ РЅСѓР¶РЅРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ
     float speedOfRotMark = 5f;
 
     public PlayerController_01 PlayerController_01;
@@ -35,7 +35,7 @@ public class TargetMarkControl : MonoBehaviour
 
     }
 
-    // Процедуры, для управленем поворота игрока
+    // РџСЂРѕС†РµРґСѓСЂС‹, РґР»СЏ СѓРїСЂР°РІР»РµРЅРµРј РїРѕРІРѕСЂРѕС‚Р° РёРіСЂРѕРєР°
 
     //public bool isRotatingRight = false;
     //public bool isRotatingLeft = false;
@@ -49,9 +49,9 @@ public class TargetMarkControl : MonoBehaviour
     //            isRotatingRight = true;
 
     //            statrRotPlayerRotation = Player.transform.rotation.eulerAngles.y;
-    //            // Устанавливаем текущий угол поворота игрока, как начальный. Теперь мы должны повернуться направо на 90 градусов, от него
+    //            // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј С‚РµРєСѓС‰РёР№ СѓРіРѕР» РїРѕРІРѕСЂРѕС‚Р° РёРіСЂРѕРєР°, РєР°Рє РЅР°С‡Р°Р»СЊРЅС‹Р№. РўРµРїРµСЂСЊ РјС‹ РґРѕР»Р¶РЅС‹ РїРѕРІРµСЂРЅСѓС‚СЊСЃСЏ РЅР°РїСЂР°РІРѕ РЅР° 90 РіСЂР°РґСѓСЃРѕРІ, РѕС‚ РЅРµРіРѕ
 
-    //            print("Инициализируем поворот вправо. Начальный угол игрока = " + statrRotPlayerRotation);
+    //            print("РРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј РїРѕРІРѕСЂРѕС‚ РІРїСЂР°РІРѕ. РќР°С‡Р°Р»СЊРЅС‹Р№ СѓРіРѕР» РёРіСЂРѕРєР° = " + statrRotPlayerRotation);
     //        }
     //    }
     //}
@@ -65,9 +65,9 @@ public class TargetMarkControl : MonoBehaviour
     //            isRotatingLeft = true;
 
     //            statrRotPlayerRotation = Player.transform.rotation.eulerAngles.y;
-    //            // Устанавливаем текущий угол поворота игрока, как начальный. Теперь мы должны повернуться направо на 90 градусов, от него
+    //            // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј С‚РµРєСѓС‰РёР№ СѓРіРѕР» РїРѕРІРѕСЂРѕС‚Р° РёРіСЂРѕРєР°, РєР°Рє РЅР°С‡Р°Р»СЊРЅС‹Р№. РўРµРїРµСЂСЊ РјС‹ РґРѕР»Р¶РЅС‹ РїРѕРІРµСЂРЅСѓС‚СЊСЃСЏ РЅР°РїСЂР°РІРѕ РЅР° 90 РіСЂР°РґСѓСЃРѕРІ, РѕС‚ РЅРµРіРѕ
 
-    //            print("Инициализируем поворот влево. Начальный угол игрока = " + statrRotPlayerRotation);
+    //            print("РРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј РїРѕРІРѕСЂРѕС‚ РІР»РµРІРѕ. РќР°С‡Р°Р»СЊРЅС‹Р№ СѓРіРѕР» РёРіСЂРѕРєР° = " + statrRotPlayerRotation);
     //        }
     //    }
     //}
@@ -75,16 +75,16 @@ public class TargetMarkControl : MonoBehaviour
     float currentPlayerRotation;
     public float statrRotPlayerRotation;
 
-    float dill = 5f; // Ценя деления для поворота игрока относительно нужного поворота
+    float dill = 5f; // Р¦РµРЅСЏ РґРµР»РµРЅРёСЏ РґР»СЏ РїРѕРІРѕСЂРѕС‚Р° РёРіСЂРѕРєР° РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РЅСѓР¶РЅРѕРіРѕ РїРѕРІРѕСЂРѕС‚Р°
 
     int timer = 0;
-    bool isCanRot = false; // Мы можем поворачивать?
+    bool isCanRot = false; // РњС‹ РјРѕР¶РµРј РїРѕРІРѕСЂР°С‡РёРІР°С‚СЊ?
 
 
 
     void FixedUpdate()
     {
-        // Добавил таймер, т.к. были небольшие проблемы с поворотом, сразу после запуска
+        // Р”РѕР±Р°РІРёР» С‚Р°Р№РјРµСЂ, С‚.Рє. Р±С‹Р»Рё РЅРµР±РѕР»СЊС€РёРµ РїСЂРѕР±Р»РµРјС‹ СЃ РїРѕРІРѕСЂРѕС‚РѕРј, СЃСЂР°Р·Сѓ РїРѕСЃР»Рµ Р·Р°РїСѓСЃРєР°
         if (timer < 5) timer++;
         else if (timer == 5)
         {
@@ -92,7 +92,7 @@ public class TargetMarkControl : MonoBehaviour
             isCanRot = true;
         }
 
-        //// ----- Работаем с поворотом игрока
+        //// ----- Р Р°Р±РѕС‚Р°РµРј СЃ РїРѕРІРѕСЂРѕС‚РѕРј РёРіСЂРѕРєР°
         {
 
 
@@ -106,12 +106,12 @@ public class TargetMarkControl : MonoBehaviour
             //    {
             //        directionOfRotation = 0;
 
-            //        //print("Мы в процессе поворота вправо. Разница между текущим и требуемым углом поворота составляет: " + diffAngle);
+            //        //print("РњС‹ РІ РїСЂРѕС†РµСЃСЃРµ РїРѕРІРѕСЂРѕС‚Р° РІРїСЂР°РІРѕ. Р Р°Р·РЅРёС†Р° РјРµР¶РґСѓ С‚РµРєСѓС‰РёРј Рё С‚СЂРµР±СѓРµРјС‹Рј СѓРіР»РѕРј РїРѕРІРѕСЂРѕС‚Р° СЃРѕСЃС‚Р°РІР»СЏРµС‚: " + diffAngle);
             //    }
             //    else
             //    {
-            //        // Мы повернули достаточно вправо
-            //        print("Мы повернули достаточно вправо");
+            //        // РњС‹ РїРѕРІРµСЂРЅСѓР»Рё РґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РІРїСЂР°РІРѕ
+            //        print("РњС‹ РїРѕРІРµСЂРЅСѓР»Рё РґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РІРїСЂР°РІРѕ");
             //        Player.transform.rotation = Quaternion.Euler(Player.transform.rotation.eulerAngles.x, statrRotPlayerRotation + 90f, Player.transform.rotation.eulerAngles.z);
 
             //        directionOfRotation = 90;
@@ -127,12 +127,12 @@ public class TargetMarkControl : MonoBehaviour
             //    {
             //        directionOfRotation = 180;
 
-            //        //print("Мы в процессе поворота влево. Разница между текущим и требуемым углом поворота составляет: " + diffAngle);
+            //        //print("РњС‹ РІ РїСЂРѕС†РµСЃСЃРµ РїРѕРІРѕСЂРѕС‚Р° РІР»РµРІРѕ. Р Р°Р·РЅРёС†Р° РјРµР¶РґСѓ С‚РµРєСѓС‰РёРј Рё С‚СЂРµР±СѓРµРјС‹Рј СѓРіР»РѕРј РїРѕРІРѕСЂРѕС‚Р° СЃРѕСЃС‚Р°РІР»СЏРµС‚: " + diffAngle);
             //    }
             //    else
             //    {
-            //        // Мы повернули достаточно влево
-            //        print("Мы повернули достаточно влево");
+            //        // РњС‹ РїРѕРІРµСЂРЅСѓР»Рё РґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РІР»РµРІРѕ
+            //        print("РњС‹ РїРѕРІРµСЂРЅСѓР»Рё РґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РІР»РµРІРѕ");
             //        Player.transform.rotation = Quaternion.Euler(Player.transform.rotation.eulerAngles.x, statrRotPlayerRotation - 90f, Player.transform.rotation.eulerAngles.z);
 
             //        directionOfRotation = 90;
@@ -142,22 +142,22 @@ public class TargetMarkControl : MonoBehaviour
         }
 
 
-        // ----- Работаем с маркером локальной карты:
+        // ----- Р Р°Р±РѕС‚Р°РµРј СЃ РјР°СЂРєРµСЂРѕРј Р»РѕРєР°Р»СЊРЅРѕР№ РєР°СЂС‚С‹:
 
-        // Получаем угол поворота
+        // РџРѕР»СѓС‡Р°РµРј СѓРіРѕР» РїРѕРІРѕСЂРѕС‚Р°
         currentRotation = MainMarkRot.transform.rotation.eulerAngles.z;
 
         //print("currentRotation = " + currentRotation);
 
-        // Вычисляем разницу между текущим углом и целевым
+        // Р’С‹С‡РёСЃР»СЏРµРј СЂР°Р·РЅРёС†Сѓ РјРµР¶РґСѓ С‚РµРєСѓС‰РёРј СѓРіР»РѕРј Рё С†РµР»РµРІС‹Рј
         float delta = directionOfRotation - currentRotation;
 
-        // Если разница больше скорости вращения, вращаем объект
+        // Р•СЃР»Рё СЂР°Р·РЅРёС†Р° Р±РѕР»СЊС€Рµ СЃРєРѕСЂРѕСЃС‚Рё РІСЂР°С‰РµРЅРёСЏ, РІСЂР°С‰Р°РµРј РѕР±СЉРµРєС‚
         if (Mathf.Abs(delta) > speedOfRotMark)
         {
             float newRotation = currentRotation + Mathf.Sign(delta) * speedOfRotMark;
 
-            // Задаём новый угол поворота
+            // Р—Р°РґР°С‘Рј РЅРѕРІС‹Р№ СѓРіРѕР» РїРѕРІРѕСЂРѕС‚Р°
             MainMarkRot.transform.rotation = Quaternion.Euler(0, 0, newRotation);
         }
         else
@@ -168,19 +168,19 @@ public class TargetMarkControl : MonoBehaviour
         float offset = 3;
         float deletelCoeff = 10f * 100;
 
-        int delitRot = 20; // Делитель, по которому мы определяем, сейчас будем делать маленький, или большой поворот
-        // т.е. например в левой четверти: от 0 до delitRot - большой угол поворота, и от delitRot до 90 - маленький
+        int delitRot = 20; // Р”РµР»РёС‚РµР»СЊ, РїРѕ РєРѕС‚РѕСЂРѕРјСѓ РјС‹ РѕРїСЂРµРґРµР»СЏРµРј, СЃРµР№С‡Р°СЃ Р±СѓРґРµРј РґРµР»Р°С‚СЊ РјР°Р»РµРЅСЊРєРёР№, РёР»Рё Р±РѕР»СЊС€РѕР№ РїРѕРІРѕСЂРѕС‚
+        // С‚.Рµ. РЅР°РїСЂРёРјРµСЂ РІ Р»РµРІРѕР№ С‡РµС‚РІРµСЂС‚Рё: РѕС‚ 0 РґРѕ delitRot - Р±РѕР»СЊС€РѕР№ СѓРіРѕР» РїРѕРІРѕСЂРѕС‚Р°, Рё РѕС‚ delitRot РґРѕ 90 - РјР°Р»РµРЅСЊРєРёР№
 
-        // Для управления персонажем
+        // Р”Р»СЏ СѓРїСЂР°РІР»РµРЅРёСЏ РїРµСЂСЃРѕРЅР°Р¶РµРј
         if (directionOfRotation != 90)
         {
-            // Небольшие повороты:
+            // РќРµР±РѕР»СЊС€РёРµ РїРѕРІРѕСЂРѕС‚С‹:
 
             if (directionOfRotation >= (90 + offset) && directionOfRotation <= (180 - delitRot))
             {
                 float locCoff = (directionOfRotation - 90) / deletelCoeff;
 
-                print("< TargetMarkControl: Небольшой поворот влево");
+                print("< TargetMarkControl: РќРµР±РѕР»СЊС€РѕР№ РїРѕРІРѕСЂРѕС‚ РІР»РµРІРѕ");
 
                 PlayerController_01.PlayerControl_TurnLeft(locCoff);
                 Arr_left.enabled = true;
@@ -190,20 +190,20 @@ public class TargetMarkControl : MonoBehaviour
             {
                 float locCoff = (90 - directionOfRotation) / deletelCoeff;
 
-                print("> TargetMarkControl: Небольшой поворот вправо");
+                print("> TargetMarkControl: РќРµР±РѕР»СЊС€РѕР№ РїРѕРІРѕСЂРѕС‚ РІРїСЂР°РІРѕ");
 
                 PlayerController_01.PlayerControl_TurnRight(locCoff);
                 Arr_right.enabled = true;
                 Arr_left.enabled = false;
             }
 
-            // Большие повороты:
-            // Работают, только если угол > 80
+            // Р‘РѕР»СЊС€РёРµ РїРѕРІРѕСЂРѕС‚С‹:
+            // Р Р°Р±РѕС‚Р°СЋС‚, С‚РѕР»СЊРєРѕ РµСЃР»Рё СѓРіРѕР» > 80
 
             else
             if (directionOfRotation > (180 - delitRot) && directionOfRotation <= 180)
             {
-                print("<< TargetMarkControl: Большой поворот влево");
+                print("<< TargetMarkControl: Р‘РѕР»СЊС€РѕР№ РїРѕРІРѕСЂРѕС‚ РІР»РµРІРѕ");
 
                 PlayerController_01.PlayerControl_TurnLeft(0.1f);
                 Arr_left.enabled = true;
@@ -211,7 +211,7 @@ public class TargetMarkControl : MonoBehaviour
             }
             else if (directionOfRotation < delitRot && directionOfRotation >= 0)
             {
-                print(">> TargetMarkControl: Большой поворот вправо");
+                print(">> TargetMarkControl: Р‘РѕР»СЊС€РѕР№ РїРѕРІРѕСЂРѕС‚ РІРїСЂР°РІРѕ");
 
                 PlayerController_01.PlayerControl_TurnRight(0.1f);
                 Arr_right.enabled = true;
@@ -221,13 +221,13 @@ public class TargetMarkControl : MonoBehaviour
         
         if (directionOfRotation > (90 - offset) && directionOfRotation < (90 + offset))
         {
-            // Выключаем все значки
+            // Р’С‹РєР»СЋС‡Р°РµРј РІСЃРµ Р·РЅР°С‡РєРё
 
             Arr_right.enabled = false;
             Arr_left.enabled = false;
         }
 
-        // Здесь я не прописал логику, как перснаж понимает, что он уже достаточно повернул, и можно больше не поворачивать
-        // Эта логика будет выполнятся с использованием глобальной карты
+        // Р—РґРµСЃСЊ СЏ РЅРµ РїСЂРѕРїРёСЃР°Р» Р»РѕРіРёРєСѓ, РєР°Рє РїРµСЂСЃРЅР°Р¶ РїРѕРЅРёРјР°РµС‚, С‡С‚Рѕ РѕРЅ СѓР¶Рµ РґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РїРѕРІРµСЂРЅСѓР», Рё РјРѕР¶РЅРѕ Р±РѕР»СЊС€Рµ РЅРµ РїРѕРІРѕСЂР°С‡РёРІР°С‚СЊ
+        // Р­С‚Р° Р»РѕРіРёРєР° Р±СѓРґРµС‚ РІС‹РїРѕР»РЅСЏС‚СЃСЏ СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј РіР»РѕР±Р°Р»СЊРЅРѕР№ РєР°СЂС‚С‹
     }
 }
